@@ -1,0 +1,41 @@
+{
+	"name": "deable/encore",
+	"type": "library",
+	"description": "Simpliest way to use webpack on your nette project.",
+	"keywords": [
+		"nette",
+		"javascript",
+		"webpack",
+		"webpack-encore"
+	],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Lukas Povoda",
+			"email": "lupo112@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">= 7.3",
+		"ext-json": "*",
+		"nette/application": "^3.1",
+		"nette/di": "^3.0",
+		"nette/utils": "^3.2",
+		"latte/latte": "^2.9"
+	},
+	"archive": {
+		"exclude": [
+			"example/",
+			".gitignore",
+			".editorconfig",
+			"*.md",
+			"*.yml",
+			"*.xml"
+		]
+	},
+	"autoload": {
+		"psr-4": {
+			"Deable\\Encore\\": "src"
+		}
+	}
+}
