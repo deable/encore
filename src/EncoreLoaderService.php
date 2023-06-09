@@ -10,8 +10,7 @@ use Nette\Utils\Html;
 
 final class EncoreLoaderService
 {
-	/** @var array */
-	private $entryPoints;
+	private array $entryPoints;
 
 	public function __construct(array $entryPoints)
 	{

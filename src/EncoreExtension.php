@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Deable\Encore;
 
+use Deable\Encore\Latte\LatteExtension;
 use Nette\Bridges\ApplicationLatte\LatteFactory;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\FactoryDefinition;
@@ -13,8 +14,7 @@ use Nette\Schema\Schema;
 
 final class EncoreExtension extends CompilerExtension
 {
-	/** @var string */
-	private $wwwDir;
+	private string $wwwDir;
 
 	public function __construct(string $wwwDir)
 	{
@@ -46,12 +46,15 @@ final class EncoreExtension extends CompilerExtension
 			->setType(EncoreLoaderService::class)
 			->setArgument('entryPoints', $entrypoints['entrypoints']);
 
+		$extensionService = $builder->addDefinition($this->prefix('extension'))
+			->setType(LatteExtension::class);
+
 		/** @var FactoryDefinition $factoryDefinition */
 		$factoryDefinition = $builder->getDefinitionByType(LatteFactory::class);
 		$factoryDefinition
 			->getResultDefinition()
 			->addSetup('addProvider', ['name' => 'encoreLoader', 'value' => $encoreLoaderService])
-			->addSetup('?->onCompile[] = function ($engine) { ?::install( $engine->getCompiler()); }', ['@self', EncoreMacroSet::class]);
+			->addSetup('addExtension', [$extensionService]);
 	}
 
 }
