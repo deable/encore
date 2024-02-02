@@ -23,11 +23,9 @@ final class EncoreExtension extends CompilerExtension
 
 	public function getConfigSchema(): Schema
 	{
-		return Expect::structure(
-			[
-				'distDir' => Expect::string()->default('dist'),
-			]
-		);
+		return Expect::structure([
+			'distDir' => Expect::string()->default('dist'),
+		]);
 	}
 
 	public function beforeCompile(): void
@@ -44,6 +42,7 @@ final class EncoreExtension extends CompilerExtension
 
 		$encoreLoaderService = $builder->addDefinition($this->prefix('loader'))
 			->setType(EncoreLoaderService::class)
+			->setArgument('wwwDir', $this->wwwDir)
 			->setArgument('entryPoints', $entrypoints['entrypoints']);
 
 		$extensionService = $builder->addDefinition($this->prefix('extension'))
