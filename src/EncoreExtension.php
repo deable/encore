@@ -52,7 +52,7 @@ final class EncoreExtension extends CompilerExtension
 		$factoryDefinition = $builder->getDefinitionByType(LatteFactory::class);
 		$factoryDefinition
 			->getResultDefinition()
-			->addSetup('addProvider', ['name' => 'encoreLoader', 'value' => $encoreLoaderService])
+			->addSetup('addProvider', ['encoreLoader', $encoreLoaderService])
 			->addSetup('addExtension', [$extensionService]);
 	}
 
